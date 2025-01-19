@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML and CSS Feedback Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            font-size: 1rem;
+            padding: 10px;
+        }
+
+        .text-output {
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
+        }
+
+        #feedback {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #f9f9f9;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+    </style>
+    <script>
+        function restartForm() {
+            // Clear all checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach((checkbox) => (checkbox.checked = false));
+            // Clear the feedback section
+            document.getElementById('feedback').innerHTML = '';
+        }
+        function generateFeedback() {
+            const wellDoneOptions = Array.from(document.querySelectorAll('input[name="wellDone"]:checked')).map(el => el.value);
+            const htmlImproveOptions = Array.from(document.querySelectorAll('input[name="htmlImprove"]:checked')).map(el => el.value);
+            const cssImproveOptions = Array.from(document.querySelectorAll('input[name="cssImprove"]:checked')).map(el => el.value);
+
+            const wellDoneText = wellDoneOptions.length > 0
+                ? `<b>What was well done:</b><ul>${wellDoneOptions.map(item => `<li>${item}</li>`).join("")}</ul>`
+                : "";
+
+            const htmlImproveText = htmlImproveOptions.length > 0
+                ? `<b>HTML, Quality Assurance and image optimisation:</b><ul>${htmlImproveOptions.map(item => `<li>${item}</li>`).join("")}</ul>`
+                : "";
+
+            const cssImproveText = cssImproveOptions.length > 0
+                ? `<b>CSS:</b><ul>${cssImproveOptions.map(item => `<li>${item}</li>`).join("")}</ul>`
+                : "";
+
+            const improveText = htmlImproveOptions.length > 0 || cssImproveOptions.length > 0
+                ? `<b>What needs to be improved:</b> </br>${htmlImproveText}${cssImproveText}`
+                : "";
+
+            document.getElementById('feedback').innerHTML = [wellDoneText, improveText].filter(Boolean).join("<br><br>");
+        }
+    </script>
+</head>
+<body>
+    <h1>HTML and CSS Feedback Tool</h1>
+    <div class="container">
+        <div class="column">
+            <h3>What was well done</h3>
+            <form id="feedbackForm">
+               <label> <input type="checkbox" name="wellDone" value="You implemented most of the required HTML and CSS tasks effectively. However, review the few points you need to review. "> Implemented most of the required tasks effectively. Consider the few comments</label><br>
+               <label> <input type="checkbox" name="wellDone" value="You successfully completed all HTML and CSS tasks, with only minor improvements suggested."> Successfully completed all tasks, with minor suggestions.</label><br>
+               <label> <input type="checkbox" name="wellDone" value="You effectively used classes, divs, or other HTML tags for styling in the CSS file."> Effectively used HTML tags for styling.</label><br>
+               <label> <input type="checkbox" name="wellDone" value="The metadata defined in your HTML files is relevant and well-constructed."> Metadata is relevant and well-constructed.</label><br>
+                <label><input type="checkbox" name="wellDone" value="The CSS file is correctly linked, and the folder structure is well-organized."> CSS file is linked correctly; folder structure is organized.</label><br>
+              <label>  <input type="checkbox" name="wellDone" value="The image is optimized with the correct parameters and display correctly."> Images are optimized and display correctly.</label><br>
+               <label> <input type="checkbox" name="wellDone" value="The links and paths in your code are correctly implemented and functional."> Links and paths are correctly implemented.</label><br>
+               <label> <input type="checkbox" name="wellDone" value="The figure captions and alt text are detailed and descriptive of the image content."> Detailed figure captions and alt text.</label><br>
+               <label> <input type="checkbox" name="wellDone" value="The color contrast meets accessibility standards."> Color contrast meets accessibility standards.</label><br>
+               <label> <input type="checkbox" name="wellDone" value="Great job! Your work demonstrates a solid understanding of HTML and CSS. Keep up the good work, and consider the provided feedback to further enhance your projects in the future."> Overal positive feedback.</label><br>
+               
+            </form>
+        </div>
+        <div class="column">
+            <h3>What to improve (HTML)</h3>
+            <form>
+                <label><input type="checkbox" name="htmlImprove" value="Include the standard HTML structure in your code."> Missing standard HTML structure.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Set the website language to British English in the HTML tag."> Language not set to British English.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Provide a relevant metadata description and ensure the page title reflects the content accurately."> Metadata and page title need improvement.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Correctly/Include semantic structure elements like &ltheader&gt and &ltnav&gt as required in the brief."> Semantic structure elements are missing.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Fix the broken link to the cv.html page."> Broken link to cv.html.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Correct the paths for your images to ensure they display properly."> Image paths need correction.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Wrap the img in the &ltfigure&gt element and add a relevant figcaption"> figure/figurecaption missing.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Add a hyperlink to the MMU website as required."> Missing hyperlink to MMU website.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Include  &ltstrong&gt and  &ltem&gt elements in your text."> Missing  &ltstrong&gt and &ltem&gt elements.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Add a footer to your webpage."> Footer is missing.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Validate your index/cv HTML code and fix all identified errors."> HTML code contains errors.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Include a table in the cv webpage as required."> Missing table in the cv webpage.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Include an unordered list in the cv webpage as required."> Missing unordered list in the cv webpage.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Include an ordered list in the cv webpage as required."> Missing ordered list in the cv webpage.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Provide descriptive alt text for your images and include a well-defined figure caption."> Alt text or figure caption is missing or insufficient.</label><br>
+                <label><input type="checkbox" name="htmlImprove" value="Optimize and crop the image following the required size."> Image is not optimized or cropped correctly.</label><br>
+            </form>
+        </div>
+        <div class="column">
+            <h3>What to improve (CSS)</h3>
+            <form>
+                <label><input type="checkbox" name="cssImprove" value="Ensure font size, margins, and padding are set as required for the whole HTML files."> Incorrect font size, margins, or padding.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Include a Google font as specified in the brief."> Missing Google font.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Define font size using rems as required in the brief."> Font size not defined using rems.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Set a max width for lines to improve readability."> Max width for lines is not set.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Style headings to appear in capital letters using CSS."> Headings are not in capital letters.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Ensure all link states are defined (hover, active, etc.)."> Link states are incomplete.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Define and style the 'main-navigation' class in HTML and CSS."> Missing 'main-navigation' class.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Review the required style for the table."> Table style needs improvement.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Fix errors in your CSS to ensure validity."> CSS contains errors that need fixing.</label><br>
+                <label><input type="checkbox" name="cssImprove" value="Consider feedback to improve your personal webpage and carefully review the assessment details in the future."> Consider feedback and review assessment details.</label><br>
+            </form>
+        </div>
+    </div>
+    <div class="text-output">
+        <h3>Generated Feedback</h3>
+        <div id="feedback"></div>
+        <button onclick="generateFeedback()">Generate Feedback</button>
+        <button onclick="restartForm()">Restart</button>
+    </div>
+</body>
+</html>
